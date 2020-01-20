@@ -12,13 +12,12 @@ SC_MODULE(testbench)
 
   void print()
   {
-    cout << setw(5);
-
+    cout<< setw(6);
     for (int i = 0; i < INSTRUCTION_SIZE; ++i) //Imprime las instrucciones en binario
       cout<< tb_in.read().range(INSTRUCTION_SIZE-(i+1),INSTRUCTION_SIZE-(i+1));
 
-    cout<<setw(5);
-    cout << "  | " << setw(5) << tb_in.read() << " |  " << clk.read() <<"  | "; //Imprime las instrucciones en decimal
+    cout<<setw(4);
+    cout << "  | " << setw(5) << tb_in.read() << " |  "  << clk.read() <<"  | "; //Imprime las instrucciones en decimal y el clock
 
     for (int i = 0; i < INSTRUCTION_SIZE; ++i)// Imprime el primer pipe
       cout << pipe1.read().range(INSTRUCTION_SIZE-(i+1),INSTRUCTION_SIZE-(i+1));
