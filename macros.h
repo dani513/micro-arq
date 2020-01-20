@@ -1,0 +1,8 @@
+#ifndef MACROS_OF_MY_PROJECT
+#define MACROS_OF_MY_PROJECT
+
+#define INSTRUCTIONS 6
+#define INSTRUCTION_SIZE 4
+#define ISZ INSTRUCTION_SIZE
+
+#endif
