@@ -20,4 +20,4 @@ El Makefile está configurado para sistemas de 64 bits. En caso de que el suyo s
 - **Luis Cortés** - CI: **26.880.969**
 - **Jesús Valero** - CI: **27.241.070**
 - **Daniel Monsalve** - CI: **27.777.513**
-- **Jorge Picón** - CI: **26.467.77**
+- **Jorge Picón** - CI: **26.467.778**
