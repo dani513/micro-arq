@@ -1,5 +1,5 @@
 # **Microprocesador - ARQ**
-Implementación del Fetch junto con tres Pipes en la simulación de un Microprocesador en System C.
+Desarrollo de un Microprocesador en System C para la asignature de Arquitectura del computador.
 
 ### **REQUISITOS**
 Para la compilación y ejecución de este programa, es necesario tener instalado System C. En caso de no tenerlo, a continuación se le presenta el siguiente enlace para su instalación: [Instalación de System C](https://github.com/juliolugo96/computer_architecture)
