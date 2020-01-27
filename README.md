@@ -1,5 +1,5 @@
 # **Microprocesador - ARQ**
-Desarrollo de un Microprocesador en System C para la asignature de Arquitectura del computador.
+Desarrollo de un Microprocesador en System C para la asignatura de Arquitectura del computador.
 
 ### **REQUISITOS**
 Para la compilación y ejecución de este programa, es necesario tener instalado System C. En caso de no tenerlo, a continuación se le presenta el siguiente enlace para su instalación: [Instalación de System C](https://github.com/juliolugo96/computer_architecture)
