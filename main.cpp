@@ -5,6 +5,7 @@
 #include "dcode.h"
 #include "macros.h"
 #include "fetch.h"
+#include "ALU.h"
 #include "testbench.h"
 
 int sc_main(int argv, char* argc[])
@@ -15,11 +16,13 @@ int sc_main(int argv, char* argc[])
   
   Fetch ft("fetch");
   Dcode dcode("dcode");
+  ALU alu("alu");
   Testbench tb("tb");
   
   
-  sc_signal < sc_uint<INSTRUCTION> > decoded_instruction_sg, op1_sg, op2_sg, res_sg;
-  sc_signal < sc_uint<INSTRUCTION_SIZE> >instruction_in_sg;
+  sc_signal < sc_uint < INSTRUCTION > > decoded_instruction_sg;
+  sc_signal < sc_uint < INSTRUCTION > > address_1_sg, address_2_sg, res_address_sg, value_1_sg, value_2_sg, res_sg;
+  sc_signal < sc_uint < INSTRUCTION_SIZE > > instruction_in_sg;
   
   ft.instruction_in(instruction_in_sg);
   ft.clk(clock);
@@ -27,16 +30,26 @@ int sc_main(int argv, char* argc[])
   dcode.clk(clock);
   dcode.instruction_to_decode(instruction_in_sg);
   dcode.instruction(decoded_instruction_sg);
-  dcode.op1(op1_sg);
-  dcode.op2(op2_sg);
-  dcode.res(res_sg);
+  dcode.address_1(address_1_sg);
+  dcode.address_2(address_2_sg);
+  dcode.res_address(res_address_sg);
+
+  alu.clk(clock);
+  alu.instruction(decoded_instruction_sg);
+  alu.address_1(address_1_sg);
+  alu.address_2(address_2_sg);
+  alu.value_1(value_1_sg);
+  alu.value_2(value_2_sg);
+  alu.res(res_sg);
 
   tb.clk(clock);
   tb.instruction(decoded_instruction_sg);
-  tb.op1(op1_sg);
-  tb.op2(op2_sg);
+  tb.address_1(address_1_sg);
+  tb.address_2(address_2_sg);
+  tb.res_address(res_address_sg);
+  tb.value_1(value_1_sg);
+  tb.value_2(value_2_sg);
   tb.res(res_sg);
-
   
   sc_start();
   return 0;

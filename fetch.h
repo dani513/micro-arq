@@ -4,11 +4,10 @@
 
 #include <fstream>
 #include <string>
-#include <iomanip>
 #include "macros.h"
 using namespace std;
 
-SC_MODULE (Fetch)
+SC_MODULE(Fetch)
 {
   ifstream MI;
   sc_in <bool> clk;
@@ -20,7 +19,7 @@ SC_MODULE (Fetch)
 		getline(MI, line);
 		sc_uint < INSTRUCTION_SIZE > read_instruction;
 
-		for (int i = 0; i < INSTRUCTION_SIZE; ++i)
+		for(int i = 0; i < INSTRUCTION_SIZE; ++i)
       (line[i] == '1') ? read_instruction[INSTRUCTION_SIZE - 1 - i] = 1 : read_instruction[INSTRUCTION_SIZE - 1 - i] = 0;
 
     instruction_in.write(read_instruction);
@@ -30,7 +29,7 @@ SC_MODULE (Fetch)
   {
     MI.open(MI_filename);
     SC_METHOD(fetch);
-    sensitive << clk.neg();
+    sensitive << clk.pos();
   }
   
   ~Fetch()

@@ -7,29 +7,38 @@
 SC_MODULE(Testbench)
 {
   sc_in <bool> clk;
-  sc_in < sc_uint < INSTRUCTION> > instruction, op1, op2, res;
+  sc_in < sc_uint < INSTRUCTION > > instruction, address_1, address_2, res_address, value_1, value_2, res;
   // sc_in < sc_uint < INSTRUCTION_SIZE> > pipe1 /*, pipe2, pipe3*/;
 
-  void print(){
+  void print()
+  {
     cout << setw(4);
-    for (int i = 0; i < INSTRUCTION; ++i) //Imprime la instrucciones en binario
+    for (int i = 0; i < INSTRUCTION; ++i) //Imprime la Instrucciones en binario
       cout << instruction.read().range(INSTRUCTION-(i+1),INSTRUCTION-(i+1));
-    cout << setw(7) << "|  ";
+    cout << setw(9) << "|    ";
 
-    for (int i = 0; i < INSTRUCTION; ++i) //Imprime op1 en binario
-      cout << op1.read().range(INSTRUCTION-(i+1),INSTRUCTION-(i+1));
-    cout << " | " << setw(2);
+    for (int i = 0; i < INSTRUCTION; ++i) //Imprime la Dirección del Operando 1 en binario
+      cout << address_1.read().range(INSTRUCTION-(i+1),INSTRUCTION-(i+1));
+    cout << "    | " << setw(4);
 
-    for (int i = 0; i < INSTRUCTION; ++i) //Imprime op2 en binario
-      cout << op2.read().range(INSTRUCTION-(i+1),INSTRUCTION-(i+1));
-    cout << " |" << setw(2);
+    for (int i = 0; i < INSTRUCTION; ++i) //Imprime la Dirección del Operando 2 en binario
+      cout << address_2.read().range(INSTRUCTION-(i+1),INSTRUCTION-(i+1));
+    cout << "    |" << setw(4);
 
-    for (int i = 0; i < INSTRUCTION; ++i) //Imprime res en binario
+    for (int i = 0; i < INSTRUCTION; ++i) //Imprime el Valor del Operando 1 en binario
+      cout << value_1.read().range(INSTRUCTION-(i+1),INSTRUCTION-(i+1));
+    cout << "    |" << setw(4);
+
+    for (int i = 0; i < INSTRUCTION; ++i) //Imprime el Valor del Operando 2 en binario
+      cout << value_2.read().range(INSTRUCTION-(i+1),INSTRUCTION-(i+1));
+    cout << "   |" << setw(3);
+
+    for (int i = 0; i < INSTRUCTION; ++i) //Imprime el Resultado de la operación en binario
       cout<< res.read().range(INSTRUCTION-(i+1),INSTRUCTION-(i+1));
-    cout << " | " << setw(4);
+    cout << " | " << setw(7);
 
-    cout << instruction.read();//Imprime la instrucciones en decimal
-    cout << setw (8) << "|   ";
+    cout << instruction.read(); //Imprime las Instrucciones en decimal
+    cout << setw (11) << "|   ";
 
     switch(instruction.read())
     {
@@ -41,16 +50,15 @@ SC_MODULE(Testbench)
       case 6: cout << "STORE"; break;
       default: cout << "Por definir"; break;
     }
-    cout << endl;
+    cout << "\n";
   }
-
 
   void test()
   {
-    cout << "\nInstrucción|  Op1  |  Op2  | Res  | Decimal | Operación\n"
-         << "---------------------------------------------------------\n";
+    cout << "\nInstrucción|  Dir. Op1  |  Dir. Op2  | Val. Op1  | Val. Op2 |  Res  | Inst. Decimal | Operación\n"
+         << "------------------------------------------------------------------------------------------------\n";
 
-    for (int i = 0; i < INSTRUCTIONS; ++i)
+    for (int i = 0; i < 6; ++i)
     {
       wait();
       print();
@@ -62,7 +70,7 @@ SC_MODULE(Testbench)
   SC_CTOR(Testbench)
   {
     SC_THREAD(test);
-    sensitive << clk.neg();
+    sensitive << value_1 << value_2;
   }
 };
 
